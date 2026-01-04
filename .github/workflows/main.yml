@@ -1,4 +1,8 @@
 name: Send emails daily
+
+permissions:
+  actions: write
+
 on:
   workflow_dispatch:
   schedule:
@@ -39,3 +43,9 @@ jobs:
           LANGUAGE: ${{ vars.LANGUAGE }}
         run: |
           uv run main.py
+
+  keep-workflow-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Keep workflow alive
+        uses: WaterLemons2k/scheduled-workflow-activity-action@v2
